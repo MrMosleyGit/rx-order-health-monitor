@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rx Order Health Monitor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: summary tiles, one filter row, three small bar charts, then the work queue. */
+:root {
+  color-scheme: light;
+  --page: #f3f5f7;
+  --surface: #fcfcfb;
+  --ink: #0f1720;
+  --ink-2: #4a5563;
+  --muted: #76808d;
+  --line: #dde2e8;
+  --wash: #edf1f5;
+  --accent: #2a78d6;
+  --crit: #d03b3b;
+  --crit-wash: #fbebeb;
+  --warn: #fab219;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0e1114;
+    --surface: #171b20;
+    --ink: #eef1f4;
+    --ink-2: #b9c1cb;
+    --muted: #8a94a1;
+    --line: #2a3038;
+    --wash: #1f252c;
+    --accent: #3987e5;
+    --crit: #e66767;
+    --crit-wash: #3a1f22;
+    --warn: #fab219;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0e1114;
+  --surface: #171b20;
+  --ink: #eef1f4;
+  --ink-2: #b9c1cb;
+  --muted: #8a94a1;
+  --line: #2a3038;
+  --wash: #1f252c;
+  --accent: #3987e5;
+  --crit: #e66767;
+  --crit-wash: #3a1f22;
+  --warn: #fab219;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--page);
+  color: var(--ink);
+  font: 400 14px/1.5 var(--font-body);
+}
+.wrap { max-width: 1240px; margin: 0 auto; padding: 28px 20px 56px; display: grid; gap: 20px; }
+h1 { font-size: 22px; font-weight: 600; margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
+h2 { font-size: 15px; font-weight: 600; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+.mono { font-family: var(--font-mono); font-size: 12.5px; }
+.sub { color: var(--ink-2); }
+.small { font-size: 12.5px; color: var(--muted); }
+
+header.top { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; }
+.chip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; font-size: 12px; color: var(--ink-2); background: var(--surface); white-space: nowrap; }
+
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+.card-head { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; justify-content: space-between; padding: 14px 16px 0; }
+
+/* KPI tiles */
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.tile { padding: 14px 16px; display: grid; gap: 2px; align-content: start; }
+.tile .label { font-size: 12.5px; color: var(--ink-2); }
+.tile .value { font-size: 28px; font-weight: 600; line-height: 1.15; }
+.tile .value small { font-size: 14px; font-weight: 500; color: var(--ink-2); margin-left: 3px; }
+.tile .note { font-size: 12.5px; color: var(--muted); }
+.tile.hero { grid-column: span 2; border-left: 4px solid var(--crit); }
+.tile.hero .value { font-size: 48px; }
+.tile.hero .note { color: var(--ink-2); display: flex; align-items: center; gap: 6px; }
+@media (max-width: 420px) { .tile.hero { grid-column: auto; } }
+
+/* Filters */
+.filters { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: end; padding: 12px 16px; }
+.filters label { display: grid; gap: 3px; font-size: 12px; color: var(--ink-2); }
+select, button { font: inherit; color: var(--ink); }
+select { background: var(--surface); border: 1px solid var(--line); border-radius: 7px; padding: 6px 28px 6px 10px; min-width: 150px; }
+button { background: var(--surface); border: 1px solid var(--line); border-radius: 7px; padding: 6px 12px; cursor: pointer; }
+button:hover { background: var(--wash); }
+select:focus-visible, button:focus-visible, .bar-row:focus-visible, tr.row:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.filters .count { margin-left: auto; color: var(--ink-2); font-size: 13px; }
+
+/* Bar charts */
+.charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+.bars { padding: 10px 16px 16px; display: grid; gap: 6px; }
+.bar-row { display: grid; grid-template-columns: minmax(110px, 44%) 1fr; gap: 10px; align-items: center; border-radius: 4px; padding: 2px 0; }
+.bar-label { font-size: 12.5px; color: var(--ink-2); line-height: 1.3; }
+.bar-track { display: flex; align-items: center; gap: 6px; border-left: 1px solid var(--line); min-height: 20px; }
+.bar { height: 14px; background: var(--accent); border-radius: 0 4px 4px 0; min-width: 0; }
+.bar-val { font-size: 12.5px; color: var(--ink); font-variant-numeric: tabular-nums; }
+.bar-row:hover .bar-label, .bar-row:focus-visible .bar-label { color: var(--ink); }
+.empty { padding: 14px 16px 18px; color: var(--muted); }
+#tip { position: fixed; z-index: 10; pointer-events: none; background: var(--ink); color: var(--surface); font-size: 12.5px; line-height: 1.4; padding: 6px 9px; border-radius: 6px; max-width: 260px; display: none; }
+
+/* Tables */
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th { text-align: left; font-weight: 500; font-size: 12px; color: var(--muted); padding: 10px 12px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tbody tr:last-child td { border-bottom: 0; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+tr.row { cursor: pointer; }
+tr.row:hover td { background: var(--wash); }
+tr.row td:first-child { box-shadow: inset 3px 0 0 transparent; }
+tr.row.crit td:first-child { box-shadow: inset 3px 0 0 var(--crit); }
+tr.row.open td { background: var(--wash); border-bottom-color: transparent; }
+.strong { font-weight: 500; color: var(--ink); }
+.pill { display: inline-flex; align-items: center; gap: 5px; border-radius: 999px; padding: 1px 9px 1px 7px; font-size: 12px; white-space: nowrap; border: 1px solid var(--line); color: var(--ink); }
+.pill.crit { background: var(--crit-wash); border-color: transparent; }
+.pill svg { flex: none; }
+.over { color: var(--ink); font-weight: 500; }
+.toggle { border: 0; background: none; padding: 2px 6px; color: var(--ink-2); font-size: 12.5px; white-space: nowrap; }
+
+tr.detail td { background: var(--wash); padding: 4px 16px 18px; }
+.detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 8px; align-content: start; }
+.panel h3 { margin: 0; font-size: 12px; font-weight: 500; color: var(--muted); }
+dl.timeline { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 13px; }
+dl.timeline dt { color: var(--ink-2); }
+dl.timeline dd { margin: 0; font-variant-numeric: tabular-nums; }
+dl.timeline dd.missing { color: var(--muted); }
+.msg { white-space: pre-wrap; font-size: 13px; line-height: 1.5; border-left: 2px solid var(--line); padding-left: 10px; color: var(--ink); }
+.msg-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.msg-head span { font-size: 12.5px; color: var(--ink-2); }
+.copy { font-size: 12px; padding: 3px 9px; }
+.section-note { padding: 4px 16px 14px; color: var(--ink-2); font-size: 13px; max-width: 75ch; }
+footer { color: var(--muted); font-size: 12.5px; max-width: 80ch; }
+@media (prefers-reduced-motion: no-preference) { .bar { transition: width .25s ease; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div>
+      <h1>Rx Order Health Monitor</h1>
+      <p class="sub">Prescription home delivery orders at risk of missing their promise. Snapshot: <span id="snapshot"></span></p>
+    </div>
+    <span class="chip" title="All clinics, partners, pets and people are fictional">Synthetic data</span>
+  </header>
+
+  <section class="tiles" id="tiles" aria-label="Key numbers"></section>
+
+  <section class="card" aria-label="Filters">
+    <form class="filters" id="filters">
+      <label for="f-stage">Stage
+        <select id="f-stage"><option value="">All stages</option></select>
+      </label>
+      <label for="f-urgency">Urgency
+        <select id="f-urgency">
+          <option value="">All</option>
+          <option value="critical">Critical medication</option>
+          <option value="standard">Standard</option>
+        </select>
+      </label>
+      <label for="f-partner">Pharmacy partner
+        <select id="f-partner"><option value="">All partners</option></select>
+      </label>
+      <button type="button" id="f-clear">Clear filters</button>
+      <span class="count" id="count" aria-live="polite"></span>
+    </form>
+  </section>
+
+  <section class="charts" aria-label="At-risk orders by stage, root cause and partner">
+    <div class="card"><div class="card-head"><h2>At-risk orders by stage</h2><span class="small">in lifecycle order</span></div><div id="chart-stage"></div></div>
+    <div class="card"><div class="card-head"><h2>At-risk orders by root cause</h2></div><div id="chart-cause"></div></div>
+    <div class="card"><div class="card-head"><h2>At-risk orders by pharmacy partner</h2></div><div id="chart-partner"></div></div>
+  </section>
+
+  <section class="card" aria-label="At-risk queue">
+    <div class="card-head"><h2>At-risk queue</h2><span class="small">Critical medications first, then longest over threshold. Select a row for the drafted message.</span></div>
+    <div class="scroll">
+      <table>
+        <thead><tr>
+          <th class="num">#</th><th>Order</th><th>Pet and item</th><th>Urgency</th>
+          <th>Stage and root cause</th><th class="num">In stage</th><th class="num">Over by</th>
+          <th>Owner</th><th>Customer sees</th><th><span class="small">Details</span></th>
+        </tr></thead>
+        <tbody id="queue"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card" aria-label="Autoship holds">
+    <div class="card-head"><h2>Autoship holds</h2><span class="small" id="holds-note"></span></div>
+    <p class="section-note">Subscriptions checked before they ship. Each one below should be paused and confirmed with the pet parent before the card is charged.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Subscription</th><th>Pet and item</th><th>Urgency</th><th>Ships</th><th>Issue</th><th>Action</th></tr></thead>
+        <tbody id="holds"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card" aria-label="How orders get flagged">
+    <div class="card-head"><h2>How orders get flagged</h2><span class="small">Thresholds are starting points to tune with real data</span></div>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Stage</th><th>Clock starts</th><th>At risk when</th><th>Who acts</th></tr></thead>
+        <tbody id="rules"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    Approval and fulfillment clocks skip weekends. Label and transit clocks run on calendar time. An order only shows as Shipped after a real carrier scan. Until then the pet parent sees Preparing shipment.
+  </footer>
+</div>
+<div id="tip" role="tooltip"></div>
+
+<script>
+const DATA = /*__DATA__*/null;
+
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const state = { stage: "", urgency: "", partner: "", open: null };
+
+const ICON_CRIT = '<svg width="11" height="11" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1 11.5 11H.5z" fill="var(--crit)"/></svg>';
+const ICON_STD = '<svg width="9" height="9" viewBox="0 0 10 10" aria-hidden="true"><circle cx="5" cy="5" r="3.5" fill="none" stroke="var(--muted)" stroke-width="1.5"/></svg>';
+const pill = (u) => u === "critical"
+  ? `<span class="pill crit">${ICON_CRIT}Critical</span>`
+  : `<span class="pill">${ICON_STD}Standard</span>`;
+
+function filtered() {
+  return DATA.queue.filter((r) =>
+    (!state.stage || r.stage === state.stage) &&
+    (!state.urgency || r.urgency === state.urgency) &&
+    (!state.partner || r.partner === state.partner));
+}
+
+/* ---------- tiles ---------- */
+function renderTiles() {
+  const k = DATA.kpis;
+  $("tiles").innerHTML = `
+    <div class="card tile hero">
+      <span class="label">Orders at risk now</span>
+      <span class="value">${k.at_risk}</span>
+      <span class="note">${ICON_CRIT}${k.at_risk_critical} are critical medications</span>
+    </div>
+    <div class="card tile">
+      <span class="label">Open orders</span>
+      <span class="value">${k.open_orders}</span>
+      <span class="note">of ${k.total_orders} placed in 30 days</span>
+    </div>
+    <div class="card tile">
+      <span class="label">Approval to ship, median</span>
+      <span class="value">${k.approval_to_ship_median_days}<small>days</small></span>
+      <span class="note">90th percentile ${k.approval_to_ship_p90_days} days</span>
+    </div>
+    <div class="card tile">
+      <span class="label">On-time delivery</span>
+      <span class="value">${k.on_time_rate_pct}<small>%</small></span>
+      <span class="note">of ${k.on_time_base} orders due so far</span>
+    </div>
+    <div class="card tile">
+      <span class="label">Where is my order contacts</span>
+      <span class="value">${k.contacts_per_1000}</span>
+      <span class="note">per 1,000 orders</span>
+    </div>
+    <div class="card tile">
+      <span class="label">Autoship holds</span>
+      <span class="value">${k.autoship_holds}</span>
+      <span class="note">shipping in the next ${DATA.thresholds.autoship_lookahead_days} days</span>
+    </div>`;
+}
+
+/* ---------- bar charts ---------- */
+function barChart(el, rows) {
+  const max = Math.max(1, ...rows.map((r) => r.value));
+  if (!rows.some((r) => r.value > 0)) { el.innerHTML = '<p class="empty">No at-risk orders match these filters.</p>'; return; }
+  el.innerHTML = '<div class="bars" role="list">' + rows.map((r) => `
+    <div class="bar-row" role="listitem" tabindex="0" data-tip="${esc(r.tip)}" aria-label="${esc(r.label)}: ${r.value}">
+      <span class="bar-label">${esc(r.label)}</span>
+      <span class="bar-track"><span class="bar" style="width:calc((100% - 28px) * ${r.value / max})"></span><span class="bar-val">${r.value}</span></span>
+    </div>`).join("") + "</div>";
+}
+
+function countBy(rows, key) {
+  const m = new Map();
+  rows.forEach((r) => m.set(r[key], (m.get(r[key]) || 0) + 1));
+  return m;
+}
+
+function renderCharts(rows) {
+  const total = rows.length || 1;
+  const share = (n) => `${n} of ${rows.length} at-risk orders (${Math.round(100 * n / total)}%)`;
+
+  const byStage = countBy(rows, "stage");
+  barChart($("chart-stage"), DATA.stages.map((s) => {
+    const n = byStage.get(s.key) || 0;
+    return { label: s.label, value: n, tip: `${s.label}: ${share(n)}` };
+  }));
+
+  const byCause = [...countBy(rows, "root_cause")].sort((a, b) => b[1] - a[1]);
+  barChart($("chart-cause"), byCause.map(([label, n]) => ({ label, value: n, tip: `${label}: ${share(n)}` })));
+
+  const byPartner = countBy(rows, "partner");
+  const partners = Object.keys(DATA.open_by_partner).sort((a, b) => (byPartner.get(b) || 0) - (byPartner.get(a) || 0));
+  barChart($("chart-partner"), partners.map((p) => {
+    const n = byPartner.get(p) || 0;
+    return { label: p, value: n, tip: `${p}: ${n} at risk out of ${DATA.open_by_partner[p]} open orders` };
+  }));
+}
+
+/* ---------- queue ---------- */
+function detailHtml(r) {
+  const tl = Object.entries(r.timeline).map(([k, v]) =>
+    `<dt>${esc(k)}</dt><dd class="${v ? "" : "missing"}">${v ? esc(v) : "Not yet"}</dd>`).join("");
+  const clockNote = r.threshold_hours == null ? "Past the promised delivery date."
+    : r.threshold_hours === 0 ? "Flagged as soon as the stock check failed."
+    : `Threshold for this stage: ${r.threshold_hours} ${r.clock === "business" ? "business hours" : "hours"}.`;
+  const msg = (title, text, id) => text ? `
+    <div class="msg-head"><span>${title}</span><button type="button" class="copy" data-copy="${id}">Copy</button></div>
+    <div class="msg" id="${id}">${esc(text)}</div>` : "";
+  return `<div class="detail-grid">
+    <div class="panel"><h3>Order timeline</h3><dl class="timeline">${tl}</dl>
+      <p class="small">${esc(r.clinic)} · ${esc(r.partner)}${r.autoship ? " · Autoship" : ""}</p></div>
+    <div class="panel"><h3>What to do</h3><p>${esc(r.action)}</p>
+      <p class="small">Owner: ${esc(r.owner)}. ${clockNote}</p></div>
+    <div class="panel"><h3>Drafted messages (review before sending)</h3>
+      ${msg("To " + esc(r.pet_parent) + ", pet parent", r.message_pet_parent, "m-parent")}
+      ${msg("To the clinic", r.message_clinic, "m-clinic")}</div>
+  </div>`;
+}
+
+function renderQueue(rows) {
+  $("count").textContent = `Showing ${rows.length} of ${DATA.queue.length} at-risk orders`;
+  if (!rows.length) { $("queue").innerHTML = '<tr><td colspan="10" class="empty">No at-risk orders match these filters.</td></tr>'; return; }
+  if (!rows.some((r) => r.order_id === state.open)) state.open = null;
+  $("queue").innerHTML = rows.map((r) => {
+    const open = r.order_id === state.open;
+    return `<tr class="row ${r.urgency === "critical" ? "crit" : ""} ${open ? "open" : ""}" data-id="${r.order_id}" tabindex="0" aria-expanded="${open}">
+      <td class="num">${r.rank}</td>
+      <td><span class="mono strong">${r.order_id}</span><br><span class="small" style="white-space:nowrap">placed ${esc(r.placed)}</span></td>
+      <td><span class="strong">${esc(r.pet)}</span> <span class="small">${esc(r.species)}</span><br>${esc(r.item)}</td>
+      <td>${pill(r.urgency)}</td>
+      <td><span class="strong">${esc(r.stage_label)}</span><br><span class="sub">${esc(r.root_cause)}</span></td>
+      <td class="num">${r.in_stage_text}</td>
+      <td class="num over">${r.over_text}</td>
+      <td>${esc(r.owner)}</td>
+      <td>${esc(r.customer_status)}</td>
+      <td><span class="toggle">${open ? "Hide" : "Show"}</span></td>
+    </tr>` + (open ? `<tr class="detail"><td colspan="10">${detailHtml(r)}</td></tr>` : "");
+  }).join("");
+}
+
+function renderHolds() {
+  const h = DATA.autoship_holds;
+  $("holds-note").textContent = `${h.length} subscriptions need a check`;
+  $("holds").innerHTML = h.map((r) => `<tr>
+    <td><span class="mono strong">${r.subscription_id}</span></td>
+    <td><span class="strong">${esc(r.pet)}</span><br>${esc(r.item)}<br><span class="small">${esc(r.clinic)}</span></td>
+    <td>${pill(r.urgency)}</td>
+    <td>${esc(r.next_ship)}<br><span class="small">${r.days_out === 0 ? "today" : "in " + r.days_out + (r.days_out === 1 ? " day" : " days")}</span></td>
+    <td class="strong">${r.all_issues.map(esc).join("<br>")}</td>
+    <td>${esc(r.action)}</td></tr>`).join("") || '<tr><td colspan="6" class="empty">No subscriptions need a hold.</td></tr>';
+}
+
+function renderRules() {
+  const t = DATA.thresholds;
+  const rows = [
+    ["Awaiting vet approval", "Order placed", `No approval after ${t.approval_business_hours} business hours`, "Clinic, with a reminder from support"],
+    ["Item unavailable", "Stock check fails", "Immediately", "Support tells the pet parent the same day"],
+    ["Approved, awaiting fulfillment", "Vet approves", `No shipping label after ${t.fulfillment_business_hours} business hours (${t.fulfillment_business_hours_compounded} for compounded items)`, "Pharmacy partner"],
+    ["Label created", "Label printed", `No carrier scan after ${t.label_scan_hours} hours`, "Pharmacy partner"],
+    ["In transit", "First carrier scan", `Past the promised date, or no new scan for ${t.transit_stall_hours} hours`, "Carrier, or support when the order shipped late"],
+    ["Autoship", `${t.autoship_lookahead_days} days before each ship date`, `Clinic inactive, no refills left, or an unverified address change in the last ${t.address_change_window_days} days`, "Support pauses and confirms before charging"],
+  ];
+  $("rules").innerHTML = rows.map((r) => `<tr><td class="strong">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join("");
+}
+
+function render() {
+  const rows = filtered();
+  renderCharts(rows);
+  renderQueue(rows);
+}
+
+/* ---------- events ---------- */
+function toggleRow(id) { state.open = state.open === id ? null : id; renderQueue(filtered()); }
+
+$("queue").addEventListener("click", async (e) => {
+  const copy = e.target.closest("[data-copy]");
+  if (copy) {
+    const text = $(copy.dataset.copy).textContent;
+    try { await navigator.clipboard.writeText(text); copy.textContent = "Copied"; }
+    catch (err) {
+      const range = document.createRange(); range.selectNodeContents($(copy.dataset.copy));
+      const sel = getSelection(); sel.removeAllRanges(); sel.addRange(range);
+      copy.textContent = "Selected, press Ctrl+C";
+    }
+    setTimeout(() => { copy.textContent = "Copy"; }, 1800);
+    return;
+  }
+  const row = e.target.closest("tr.row");
+  if (row) toggleRow(row.dataset.id);
+});
+$("queue").addEventListener("keydown", (e) => {
+  const row = e.target.closest("tr.row");
+  if (row && e.target === row && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); toggleRow(row.dataset.id); }
+});
+
+[["f-stage", "stage"], ["f-urgency", "urgency"], ["f-partner", "partner"]].forEach(([id, key]) => {
+  $(id).addEventListener("change", (e) => { state[key] = e.target.value; render(); });
+});
+$("f-clear").addEventListener("click", () => {
+  state.stage = state.urgency = state.partner = "";
+  ["f-stage", "f-urgency", "f-partner"].forEach((id) => { $(id).value = ""; });
+  render();
+});
+$("filters").addEventListener("submit", (e) => e.preventDefault());
+
+const tip = $("tip");
+function showTip(el, x, y) {
+  tip.textContent = el.dataset.tip; tip.style.display = "block";
+  const w = tip.offsetWidth, h = tip.offsetHeight;
+  tip.style.left = Math.max(8, Math.min(x + 12, innerWidth - w - 8)) + "px";
+  tip.style.top = Math.max(8, y - h - 10) + "px";
+}
+document.addEventListener("mousemove", (e) => {
+  const el = e.target.closest && e.target.closest("[data-tip]");
+  if (el) showTip(el, e.clientX, e.clientY); else if (!document.activeElement.matches("[data-tip]")) tip.style.display = "none";
+});
+document.addEventListener("focusin", (e) => {
+  if (e.target.matches("[data-tip]")) { const b = e.target.getBoundingClientRect(); showTip(e.target, b.left + 80, b.top); }
+});
+document.addEventListener("focusout", () => { tip.style.display = "none"; });
+
+/* ---------- init ---------- */
+$("snapshot").textContent = DATA.snapshot;
+DATA.stages.forEach((s) => $("f-stage").insertAdjacentHTML("beforeend", `<option value="${s.key}">${esc(s.label)}</option>`));
+Object.keys(DATA.open_by_partner).sort().forEach((p) => $("f-partner").insertAdjacentHTML("beforeend", `<option value="${esc(p)}">${esc(p)}</option>`));
+state.open = DATA.queue.length ? DATA.queue[0].order_id : null;
+renderTiles(); renderHolds(); renderRules(); render();
+</script>
+</body>
+</html>

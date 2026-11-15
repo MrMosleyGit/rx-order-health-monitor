@@ -1,0 +1,15 @@
+{
+  "snapshot": "Thu, Nov 12, 2026 at 10:00 AM",
+  "kpis": {
+    "total_orders": 500,
+    "open_orders": 68,
+    "at_risk": 25,
+    "at_risk_critical": 12,
+    "approval_to_ship_median_days": 0.8,
+    "approval_to_ship_p90_days": 4.5,
+    "on_time_rate_pct": 77.3,
+    "on_time_base": 436,
+    "contacts_per_1000": 334,
+    "autoship_holds": 6
+  }
+}

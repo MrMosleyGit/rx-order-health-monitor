@@ -1,0 +1,161 @@
+subscription_id,clinic,clinic_status,pet_parent,pet_name,item,urgency,next_ship_date,refills_remaining,address_changed_at,address_verified
+SUB-7100,Brindlemoor Animal Hospital,active,Hank,Mabel,Fluoxetine 20 mg capsules,critical,2026-11-27,4,,True
+SUB-7101,Osterly Paws Veterinary,active,Imani,Pickle,"Flea and tick chewable, 6 doses",standard,2026-11-15,2,,True
+SUB-7102,Osterly Paws Veterinary,active,Alana,Remy,"Low fat gastrointestinal diet, 17 lb",standard,2026-11-26,0,,True
+SUB-7103,Pennywhistle Pet Clinic,active,Theo,Clementine,Carprofen 75 mg chewables,standard,2026-11-27,2,,True
+SUB-7104,Quillhaven Pet Clinic,active,Abel,Biscuit,"Heartworm preventive, 6 doses",standard,2026-11-21,1,,True
+SUB-7105,Hartwick Fold Veterinary,active,Caleb,Willow,Fluticasone inhaler 110 mcg,critical,2026-11-15,6,,True
+SUB-7106,Hartwick Fold Veterinary,active,Mirabel,Mochi,"Low fat gastrointestinal diet, 17 lb",standard,2026-12-04,2,,True
+SUB-7107,Quillhaven Pet Clinic,active,Jonah,Poppy,Fluoxetine 20 mg capsules,critical,2026-11-16,1,,True
+SUB-7108,Brindlemoor Animal Hospital,active,Greta,Luna,Carprofen 75 mg chewables,standard,2026-12-09,3,,True
+SUB-7109,Marrowgate Veterinary,active,Marcus,Willow,Carprofen 75 mg chewables,standard,2026-11-16,1,2026-11-04 22:37,True
+SUB-7110,Marrowgate Veterinary,active,Alana,Scout,"Flea and tick chewable, 6 doses",standard,2026-12-09,1,,True
+SUB-7111,Dunmere Animal Care,closed,Yuki,Tank,Fluticasone inhaler 110 mcg,critical,2026-11-14,2,,True
+SUB-7112,Larkspur Hollow Vet,active,Kiki,Biscuit,Carprofen 75 mg chewables,standard,2026-11-29,4,,True
+SUB-7113,Brindlemoor Animal Hospital,active,Greta,Clementine,Fluticasone inhaler 110 mcg,critical,2026-12-03,1,2026-10-28 18:55,False
+SUB-7114,Brindlemoor Animal Hospital,active,Alana,Clementine,"Heartworm preventive, 6 doses",standard,2026-11-26,5,,True
+SUB-7115,Brindlemoor Animal Hospital,active,Bianca,Moose,Carprofen 75 mg chewables,standard,2026-12-01,1,,True
+SUB-7116,Pennywhistle Pet Clinic,active,Sam,Bandit,Levothyroxine 0.3 mg tablets,critical,2026-11-28,2,2026-11-05 14:31,False
+SUB-7117,Fennick & Vale Vet,active,Greta,Cleo,Levothyroxine 0.3 mg tablets,critical,2026-11-14,3,,True
+SUB-7118,Osterly Paws Veterinary,active,Dara,Pepper,"Low fat gastrointestinal diet, 17 lb",standard,2026-12-09,2,,True
+SUB-7119,Larkspur Hollow Vet,active,Wes,Bandit,"Renal support diet, 12 cans",standard,2026-12-05,6,,True
+SUB-7120,Dunmere Animal Care,closed,Imani,Koda,Methimazole 5 mg tablets,critical,2026-11-19,0,,True
+SUB-7121,Dunmere Animal Care,closed,Dara,Biscuit,Insulin glargine 10 mL vial,critical,2026-12-05,1,,True
+SUB-7122,Tallowbrook Animal Clinic,active,Lena,Diesel,"Hydrolyzed protein diet, 25 lb",standard,2026-11-29,2,,True
+SUB-7123,Brindlemoor Animal Hospital,active,Sam,Bandit,Methimazole 5 mg tablets,critical,2026-11-20,0,2026-11-04 20:52,True
+SUB-7124,Hartwick Fold Veterinary,active,Imani,Pepper,Gabapentin oral suspension (compounded),standard,2026-11-21,4,,True
+SUB-7125,Fennick & Vale Vet,active,Hank,Mabel,Carprofen 75 mg chewables,standard,2026-11-30,2,,True
+SUB-7126,Brindlemoor Animal Hospital,active,Devon,Poppy,Carprofen 75 mg chewables,standard,2026-12-01,1,,True
+SUB-7127,Osterly Paws Veterinary,active,Abel,Pepper,Trilostane 30 mg capsules (compounded),critical,2026-12-09,1,,True
+SUB-7128,Brindlemoor Animal Hospital,active,Bianca,Willow,"Flea and tick chewable, 6 doses",standard,2026-11-26,6,,True
+SUB-7129,Pennywhistle Pet Clinic,active,Tess,Bruno,Insulin glargine 10 mL vial,critical,2026-12-07,3,2026-11-02 21:50,False
+SUB-7130,Hartwick Fold Veterinary,active,Dara,Hazel,Trilostane 30 mg capsules (compounded),critical,2026-11-24,0,,True
+SUB-7131,Osterly Paws Veterinary,active,Greta,Otis,Trilostane 30 mg capsules (compounded),critical,2026-11-17,2,,True
+SUB-7132,Brindlemoor Animal Hospital,active,Hank,Biscuit,Carprofen 75 mg chewables,standard,2026-12-04,0,,True
+SUB-7133,Tallowbrook Animal Clinic,active,Devon,Cleo,Fluticasone inhaler 110 mcg,critical,2026-11-25,4,,True
+SUB-7134,Tallowbrook Animal Clinic,active,Hank,Pepper,"Heartworm preventive, 6 doses",standard,2026-11-26,4,,True
+SUB-7135,Hartwick Fold Veterinary,active,Greta,Gus,"Hydrolyzed protein diet, 25 lb",standard,2026-11-26,3,,True
+SUB-7136,Quillhaven Pet Clinic,active,Devon,Juniper,Trilostane 30 mg capsules (compounded),critical,2026-12-08,4,,True
+SUB-7137,Tallowbrook Animal Clinic,active,Theo,Rocco,Enalapril 5 mg tablets,critical,2026-11-24,5,,True
+SUB-7138,Tallowbrook Animal Clinic,active,Devon,Willow,"Flea and tick chewable, 6 doses",standard,2026-11-21,1,,True
+SUB-7139,Larkspur Hollow Vet,active,Caleb,Bruno,Enalapril 5 mg tablets,critical,2026-11-15,3,,True
+SUB-7140,Tallowbrook Animal Clinic,active,Greta,Moose,"Heartworm preventive, 6 doses",standard,2026-11-21,2,,True
+SUB-7141,Brindlemoor Animal Hospital,active,Greta,Nala,Insulin glargine 10 mL vial,critical,2026-11-16,4,,True
+SUB-7142,Fennick & Vale Vet,active,Kiki,Remy,Fluticasone inhaler 110 mcg,critical,2026-12-02,2,,True
+SUB-7143,Brindlemoor Animal Hospital,active,Jonah,Juniper,"Hydrolyzed protein diet, 25 lb",standard,2026-11-12,1,,True
+SUB-7144,Fennick & Vale Vet,active,Mirabel,Cleo,Methimazole 5 mg tablets,critical,2026-11-28,4,2026-10-27 08:56,True
+SUB-7145,Quillhaven Pet Clinic,active,Alana,Pickle,Insulin glargine 10 mL vial,critical,2026-11-13,4,,True
+SUB-7146,Marrowgate Veterinary,active,Hank,Rocco,"Hydrolyzed protein diet, 25 lb",standard,2026-11-23,3,,True
+SUB-7147,Hartwick Fold Veterinary,active,Theo,Waffles,"Hydrolyzed protein diet, 25 lb",standard,2026-11-23,0,,True
+SUB-7148,Brindlemoor Animal Hospital,active,Omar,Ziggy,"Renal support diet, 12 cans",standard,2026-11-13,4,,True
+SUB-7149,Larkspur Hollow Vet,active,Greta,Ziggy,Trilostane 30 mg capsules (compounded),critical,2026-12-07,2,2026-11-06 03:35,False
+SUB-7150,Osterly Paws Veterinary,active,Sam,Juniper,Gabapentin oral suspension (compounded),standard,2026-12-07,2,,True
+SUB-7151,Hartwick Fold Veterinary,active,Priya,Pickle,Enalapril 5 mg tablets,critical,2026-11-21,5,,True
+SUB-7152,Pennywhistle Pet Clinic,active,Yuki,Biscuit,Fluoxetine 20 mg capsules,critical,2026-11-23,4,,True
+SUB-7153,Marrowgate Veterinary,active,Flynn,Scout,Levothyroxine 0.3 mg tablets,critical,2026-12-06,4,,True
+SUB-7154,Dunmere Animal Care,closed,Lena,Nala,Levothyroxine 0.3 mg tablets,critical,2026-11-29,4,,True
+SUB-7155,Brindlemoor Animal Hospital,active,Abel,Clementine,Enalapril 5 mg tablets,critical,2026-12-02,5,2026-10-30 03:26,True
+SUB-7156,Osterly Paws Veterinary,active,Noor,Pepper,Trilostane 30 mg capsules (compounded),critical,2026-11-28,3,2026-10-26 13:40,True
+SUB-7157,Marrowgate Veterinary,active,Noor,Remy,Gabapentin oral suspension (compounded),standard,2026-12-08,1,,True
+SUB-7158,Fennick & Vale Vet,active,Noor,Gus,Methimazole 5 mg tablets,critical,2026-11-14,2,2026-10-26 05:04,False
+SUB-7159,Dunmere Animal Care,closed,Lena,Rocco,Carprofen 75 mg chewables,standard,2026-11-24,1,,True
+SUB-7160,Osterly Paws Veterinary,active,Imani,Willow,"Hydrolyzed protein diet, 25 lb",standard,2026-11-27,6,,True
+SUB-7161,Brindlemoor Animal Hospital,active,Dara,Nala,"Low fat gastrointestinal diet, 17 lb",standard,2026-11-12,1,,True
+SUB-7162,Brindlemoor Animal Hospital,active,Priya,Luna,Levothyroxine 0.3 mg tablets,critical,2026-12-05,2,2026-10-31 02:15,False
+SUB-7163,Brindlemoor Animal Hospital,active,Jonah,Waffles,"Heartworm preventive, 6 doses",standard,2026-11-21,2,,True
+SUB-7164,Osterly Paws Veterinary,active,Hank,Mochi,"Heartworm preventive, 6 doses",standard,2026-11-22,4,,True
+SUB-7165,Brindlemoor Animal Hospital,active,Alana,Pepper,"Flea and tick chewable, 6 doses",standard,2026-12-08,3,,True
+SUB-7166,Hartwick Fold Veterinary,active,Wes,Rocco,Gabapentin oral suspension (compounded),standard,2026-12-07,3,,True
+SUB-7167,Marrowgate Veterinary,active,Theo,Ziggy,Gabapentin oral suspension (compounded),standard,2026-12-08,1,,True
+SUB-7168,Fennick & Vale Vet,active,Theo,Olive,"Flea and tick chewable, 6 doses",standard,2026-12-09,5,,True
+SUB-7169,Quillhaven Pet Clinic,active,Omar,Waffles,Carprofen 75 mg chewables,standard,2026-12-06,0,,True
+SUB-7170,Dunmere Animal Care,closed,Bianca,Luna,Fluticasone inhaler 110 mcg,critical,2026-11-14,2,,True
+SUB-7171,Fennick & Vale Vet,active,Sam,Poppy,Levothyroxine 0.3 mg tablets,critical,2026-11-20,1,2026-10-30 20:54,True
+SUB-7172,Hartwick Fold Veterinary,active,Omar,Nala,Insulin glargine 10 mL vial,critical,2026-11-29,6,2026-10-29 04:37,False
+SUB-7173,Tallowbrook Animal Clinic,active,Priya,Waffles,"Renal support diet, 12 cans",standard,2026-11-18,1,,True
+SUB-7174,Hartwick Fold Veterinary,active,Hank,Ranger,Gabapentin oral suspension (compounded),standard,2026-11-12,3,,True
+SUB-7175,Pennywhistle Pet Clinic,active,Theo,Luna,"Flea and tick chewable, 6 doses",standard,2026-12-06,6,,True
+SUB-7176,Dunmere Animal Care,closed,Sam,Nala,Insulin glargine 10 mL vial,critical,2026-12-04,6,,True
+SUB-7177,Fennick & Vale Vet,active,Hank,Olive,Methimazole 5 mg tablets,critical,2026-11-22,3,,True
+SUB-7178,Tallowbrook Animal Clinic,active,Bianca,Scout,"Heartworm preventive, 6 doses",standard,2026-11-27,3,2026-11-09 06:17,False
+SUB-7179,Pennywhistle Pet Clinic,active,Abel,Koda,"Low fat gastrointestinal diet, 17 lb",standard,2026-11-23,5,2026-10-26 03:20,False
+SUB-7180,Osterly Paws Veterinary,active,Alana,Sable,Levothyroxine 0.3 mg tablets,critical,2026-11-26,2,2026-10-31 03:53,False
+SUB-7181,Marrowgate Veterinary,active,Rosa,Ziggy,Trilostane 30 mg capsules (compounded),critical,2026-12-09,3,2026-10-31 18:14,True
+SUB-7182,Osterly Paws Veterinary,active,Jonah,Pickle,"Low fat gastrointestinal diet, 17 lb",standard,2026-11-13,0,,True
+SUB-7183,Marrowgate Veterinary,active,Theo,Koda,Insulin glargine 10 mL vial,critical,2026-11-28,3,2026-10-28 22:54,False
+SUB-7184,Larkspur Hollow Vet,active,Rosa,Fig,Gabapentin oral suspension (compounded),standard,2026-11-28,1,,True
+SUB-7185,Hartwick Fold Veterinary,active,Mirabel,Cleo,Enalapril 5 mg tablets,critical,2026-12-02,3,2026-11-10 15:17,False
+SUB-7186,Quillhaven Pet Clinic,active,Devon,Ziggy,Fluoxetine 20 mg capsules,critical,2026-11-19,4,,True
+SUB-7187,Brindlemoor Animal Hospital,active,Dara,Waffles,Trilostane 30 mg capsules (compounded),critical,2026-12-05,2,2026-11-06 01:21,False
+SUB-7188,Brindlemoor Animal Hospital,active,Devon,Scout,Insulin glargine 10 mL vial,critical,2026-12-02,3,2026-10-25 17:10,True
+SUB-7189,Osterly Paws Veterinary,active,Bianca,Nala,Fluticasone inhaler 110 mcg,critical,2026-12-06,1,2026-11-11 09:55,True
+SUB-7190,Tallowbrook Animal Clinic,active,Kiki,Juniper,Insulin glargine 10 mL vial,critical,2026-11-23,6,,True
+SUB-7191,Larkspur Hollow Vet,active,Lena,Tank,"Heartworm preventive, 6 doses",standard,2026-11-19,1,,True
+SUB-7192,Osterly Paws Veterinary,active,Priya,Nala,Fluoxetine 20 mg capsules,critical,2026-12-05,5,,True
+SUB-7193,Fennick & Vale Vet,active,Yuki,Willow,"Flea and tick chewable, 6 doses",standard,2026-11-15,2,,True
+SUB-7194,Larkspur Hollow Vet,active,Devon,Bruno,"Flea and tick chewable, 6 doses",standard,2026-12-06,2,,True
+SUB-7195,Dunmere Animal Care,closed,Greta,Pepper,Enalapril 5 mg tablets,critical,2026-11-15,5,,True
+SUB-7196,Pennywhistle Pet Clinic,active,Hank,Scout,Insulin glargine 10 mL vial,critical,2026-12-03,6,2026-11-02 21:15,False
+SUB-7197,Pennywhistle Pet Clinic,active,Theo,Juniper,Fluoxetine 20 mg capsules,critical,2026-11-19,1,,True
+SUB-7198,Osterly Paws Veterinary,active,Noor,Remy,Gabapentin oral suspension (compounded),standard,2026-11-18,4,,True
+SUB-7199,Osterly Paws Veterinary,active,Greta,Koda,"Heartworm preventive, 6 doses",standard,2026-11-18,2,,True
+SUB-7200,Tallowbrook Animal Clinic,active,Imani,Pepper,Fluoxetine 20 mg capsules,critical,2026-11-16,3,2026-11-10 12:52,False
+SUB-7201,Hartwick Fold Veterinary,active,Caleb,Fig,Gabapentin oral suspension (compounded),standard,2026-12-03,0,,True
+SUB-7202,Pennywhistle Pet Clinic,active,Caleb,Mochi,Fluticasone inhaler 110 mcg,critical,2026-11-16,5,,True
+SUB-7203,Larkspur Hollow Vet,active,Theo,Fig,"Low fat gastrointestinal diet, 17 lb",standard,2026-11-25,3,2026-11-01 23:44,False
+SUB-7204,Quillhaven Pet Clinic,active,Rosa,Nala,Methimazole 5 mg tablets,critical,2026-12-07,1,2026-10-30 13:26,True
+SUB-7205,Brindlemoor Animal Hospital,active,Hank,Ranger,Gabapentin oral suspension (compounded),standard,2026-11-13,1,2026-11-01 18:03,False
+SUB-7206,Fennick & Vale Vet,active,Dara,Fig,"Hydrolyzed protein diet, 25 lb",standard,2026-11-14,3,,True
+SUB-7207,Larkspur Hollow Vet,active,Priya,Clementine,Trilostane 30 mg capsules (compounded),critical,2026-11-20,3,,True
+SUB-7208,Fennick & Vale Vet,active,Priya,Moose,Insulin glargine 10 mL vial,critical,2026-11-26,1,,True
+SUB-7209,Hartwick Fold Veterinary,active,Kiki,Remy,Insulin glargine 10 mL vial,critical,2026-11-27,2,,True
+SUB-7210,Dunmere Animal Care,closed,Imani,Remy,Trilostane 30 mg capsules (compounded),critical,2026-11-26,1,,True
+SUB-7211,Larkspur Hollow Vet,active,Theo,Pickle,"Heartworm preventive, 6 doses",standard,2026-12-04,0,2026-11-01 18:07,False
+SUB-7212,Marrowgate Veterinary,active,Hank,Koda,Enalapril 5 mg tablets,critical,2026-11-26,3,,True
+SUB-7213,Tallowbrook Animal Clinic,active,Flynn,Scout,Enalapril 5 mg tablets,critical,2026-12-07,1,,True
+SUB-7214,Fennick & Vale Vet,active,Theo,Scout,"Flea and tick chewable, 6 doses",standard,2026-12-04,6,2026-10-24 11:31,False
+SUB-7215,Brindlemoor Animal Hospital,active,Dara,Luna,Insulin glargine 10 mL vial,critical,2026-11-12,1,,True
+SUB-7216,Fennick & Vale Vet,active,Omar,Cleo,Trilostane 30 mg capsules (compounded),critical,2026-11-23,1,,True
+SUB-7217,Quillhaven Pet Clinic,active,Rosa,Fig,"Renal support diet, 12 cans",standard,2026-11-27,2,2026-11-08 19:52,False
+SUB-7218,Fennick & Vale Vet,active,Dara,Clementine,Methimazole 5 mg tablets,critical,2026-11-17,6,2026-11-06 04:00,True
+SUB-7219,Pennywhistle Pet Clinic,active,Abel,Pepper,Enalapril 5 mg tablets,critical,2026-12-01,0,,True
+SUB-7220,Quillhaven Pet Clinic,active,Alana,Mochi,Fluoxetine 20 mg capsules,critical,2026-12-04,1,,True
+SUB-7221,Larkspur Hollow Vet,active,Yuki,Cleo,"Flea and tick chewable, 6 doses",standard,2026-11-29,1,,True
+SUB-7222,Tallowbrook Animal Clinic,active,Caleb,Poppy,Fluticasone inhaler 110 mcg,critical,2026-11-17,3,,True
+SUB-7223,Pennywhistle Pet Clinic,active,Lena,Fig,Trilostane 30 mg capsules (compounded),critical,2026-11-16,5,,True
+SUB-7224,Tallowbrook Animal Clinic,active,Abel,Bruno,"Renal support diet, 12 cans",standard,2026-12-06,3,,True
+SUB-7225,Larkspur Hollow Vet,active,Bianca,Remy,"Flea and tick chewable, 6 doses",standard,2026-12-05,3,,True
+SUB-7226,Larkspur Hollow Vet,active,Lena,Ziggy,Levothyroxine 0.3 mg tablets,critical,2026-11-19,0,2026-11-04 05:15,False
+SUB-7227,Brindlemoor Animal Hospital,active,Theo,Waffles,"Renal support diet, 12 cans",standard,2026-11-25,2,,True
+SUB-7228,Dunmere Animal Care,closed,Mirabel,Poppy,"Low fat gastrointestinal diet, 17 lb",standard,2026-11-24,2,,True
+SUB-7229,Quillhaven Pet Clinic,active,Devon,Bandit,Enalapril 5 mg tablets,critical,2026-11-29,2,,True
+SUB-7230,Marrowgate Veterinary,active,Omar,Nala,"Hydrolyzed protein diet, 25 lb",standard,2026-11-23,5,,True
+SUB-7231,Tallowbrook Animal Clinic,active,Priya,Clementine,"Heartworm preventive, 6 doses",standard,2026-11-15,1,,True
+SUB-7232,Marrowgate Veterinary,active,Lena,Biscuit,"Heartworm preventive, 6 doses",standard,2026-12-01,4,2026-10-25 22:29,False
+SUB-7233,Hartwick Fold Veterinary,active,Hank,Rocco,"Hydrolyzed protein diet, 25 lb",standard,2026-11-12,2,,True
+SUB-7234,Marrowgate Veterinary,active,Kiki,Rocco,"Renal support diet, 12 cans",standard,2026-11-30,4,,True
+SUB-7235,Dunmere Animal Care,closed,Caleb,Scout,Levothyroxine 0.3 mg tablets,critical,2026-11-19,1,,True
+SUB-7236,Osterly Paws Veterinary,active,Wes,Biscuit,Carprofen 75 mg chewables,standard,2026-11-26,3,,True
+SUB-7237,Tallowbrook Animal Clinic,active,Greta,Clementine,"Heartworm preventive, 6 doses",standard,2026-11-27,6,,True
+SUB-7238,Osterly Paws Veterinary,active,Rosa,Hazel,Fluticasone inhaler 110 mcg,critical,2026-12-07,4,,True
+SUB-7239,Fennick & Vale Vet,active,Caleb,Nala,Trilostane 30 mg capsules (compounded),critical,2026-12-08,5,,True
+SUB-7240,Marrowgate Veterinary,active,Noor,Poppy,Insulin glargine 10 mL vial,critical,2026-11-15,6,,True
+SUB-7241,Dunmere Animal Care,closed,Caleb,Bruno,"Flea and tick chewable, 6 doses",standard,2026-11-22,1,,True
+SUB-7242,Fennick & Vale Vet,active,Rosa,Diesel,Enalapril 5 mg tablets,critical,2026-12-03,0,,True
+SUB-7243,Hartwick Fold Veterinary,active,Sam,Diesel,Levothyroxine 0.3 mg tablets,critical,2026-11-29,3,,True
+SUB-7244,Quillhaven Pet Clinic,active,Caleb,Hazel,"Hydrolyzed protein diet, 25 lb",standard,2026-12-07,1,2026-11-05 03:03,False
+SUB-7245,Fennick & Vale Vet,active,Dara,Olive,Enalapril 5 mg tablets,critical,2026-11-21,0,,True
+SUB-7246,Marrowgate Veterinary,active,Theo,Waffles,Carprofen 75 mg chewables,standard,2026-11-29,4,,True
+SUB-7247,Osterly Paws Veterinary,active,Bianca,Pepper,Carprofen 75 mg chewables,standard,2026-12-09,0,,True
+SUB-7248,Fennick & Vale Vet,active,Greta,Scout,"Renal support diet, 12 cans",standard,2026-12-03,2,,True
+SUB-7249,Fennick & Vale Vet,active,Greta,Koda,"Hydrolyzed protein diet, 25 lb",standard,2026-11-16,1,2026-11-02 09:53,False
+SUB-7250,Larkspur Hollow Vet,active,Kiki,Pickle,Methimazole 5 mg tablets,critical,2026-11-12,4,,True
+SUB-7251,Osterly Paws Veterinary,active,Imani,Rocco,Trilostane 30 mg capsules (compounded),critical,2026-12-08,2,,True
+SUB-7252,Brindlemoor Animal Hospital,active,Jonah,Gus,Insulin glargine 10 mL vial,critical,2026-12-08,0,,True
+SUB-7253,Larkspur Hollow Vet,active,Lena,Pepper,"Hydrolyzed protein diet, 25 lb",standard,2026-12-03,1,,True
+SUB-7254,Hartwick Fold Veterinary,active,Greta,Diesel,Gabapentin oral suspension (compounded),standard,2026-11-21,4,,True
+SUB-7255,Hartwick Fold Veterinary,active,Rosa,Waffles,Fluoxetine 20 mg capsules,critical,2026-12-05,3,,True
+SUB-7256,Hartwick Fold Veterinary,active,Rosa,Mochi,Enalapril 5 mg tablets,critical,2026-12-01,1,,True
+SUB-7257,Fennick & Vale Vet,active,Marcus,Bandit,Levothyroxine 0.3 mg tablets,critical,2026-12-02,4,,True
+SUB-7258,Dunmere Animal Care,closed,Hank,Otis,"Flea and tick chewable, 6 doses",standard,2026-11-13,2,2026-10-27 10:43,False
+SUB-7259,Fennick & Vale Vet,active,Bianca,Bruno,Insulin glargine 10 mL vial,critical,2026-11-24,2,,True
