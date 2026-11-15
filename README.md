@@ -105,6 +105,10 @@ docs/index.html               the built dashboard
 
 ## About
 
-All data in this repository is synthetic. Every clinic, pharmacy partner, pet and person is fictional, and no real company's data or systems were used.
+I'm Timothy Mosley. I manage last mile delivery operations at Amazon, where the work comes down to catching late packages before they turn into missed deliveries. On the job I have built three internal automation tools with AI assistance, including a monitor that predicts misses and alerts our leadership team before they happen.
 
-Built with AI-assisted development (Claude).
+This project applies the same idea to prescription home delivery, where a late package can mean a pet going without medication. I wanted to show how I would take a customer problem from requirements to a working prototype.
+
+It was built with AI-assisted development using Claude. All data in this repository is synthetic. Every clinic, pharmacy partner, pet and person is fictional, and no real company's data or systems were used.
+
+Contact: [linkedin.com/in/timothy-mosley49](https://linkedin.com/in/timothy-mosley49)

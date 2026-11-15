@@ -2,6 +2,8 @@
 
 | | |
 | --- | --- |
+| Author | Timothy Mosley |
+| Last updated | November 2026 |
 | Status | Prototype built on synthetic data |
 | Product area | Prescription home delivery |
 | Primary users | Support and operations team |
@@ -19,6 +21,8 @@ The same failure patterns show up repeatedly in public reviews of veterinary hom
 5. No proactive communication
 
 Each one costs a support contact, sometimes a refund, and trust with both the pet parent and the clinic that recommended the service.
+
+**Why I picked this problem.** I manage last mile delivery operations, and the pattern is familiar. A late package is rarely a surprise to the system. The signals are there hours or days earlier, in a stage that ran long or a scan that never came. At work I built a monitor that watches for those signals and alerts leaders before a miss happens. This PRD applies that approach to prescription orders, where the cost of a miss is higher.
 
 ## 2. Goal
 
